@@ -2,3 +2,8 @@
 /bolian-security-browser/target
 /bolian-security-core/target
 /bolian-security-demo/target
+/*.iml
+/bolian-security-demo/*.iml
+/bolian-security-core/*.iml
+/bolian-security-browser/*.iml
+/bolian-security-app/*.iml
