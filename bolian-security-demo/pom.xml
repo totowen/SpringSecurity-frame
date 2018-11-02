@@ -12,9 +12,14 @@
     <artifactId>bolian-security-demo</artifactId>
 
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>com.demo</groupId>-->
+            <!--<artifactId>bolian-security-browser</artifactId>-->
+            <!--<version>${bolian.security.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.demo</groupId>
-            <artifactId>bolian-security-browser</artifactId>
+            <artifactId>bolian-security-app</artifactId>
             <version>${bolian.security.version}</version>
         </dependency>
         <dependency>

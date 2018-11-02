@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.demo.bolian.security.browser.config.support;
+package com.demo.bolian.security.core.support;
 
 /**
  *

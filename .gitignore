@@ -7,3 +7,4 @@
 /bolian-security-core/*.iml
 /bolian-security-browser/*.iml
 /bolian-security-app/*.iml
+/bolian-security-app/target
