@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.demo.bolian.security.app.impl;
+package com.demo.bolian.security.app.validate.code.impl;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +19,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * 基于redis的验证码存取器，避免由于没有session导致无法存取验证码的问题
  * 
- * @author zhailiang
  *
  */
 @Component

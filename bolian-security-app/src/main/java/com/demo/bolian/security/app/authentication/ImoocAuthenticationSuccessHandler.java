@@ -3,7 +3,6 @@
  */
 package com.demo.bolian.security.app.authentication;
 
-import com.demo.bolian.security.core.properties.LoginResponseType;
 import com.demo.bolian.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections.MapUtils;

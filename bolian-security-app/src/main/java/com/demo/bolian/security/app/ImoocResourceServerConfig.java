@@ -1,5 +1,6 @@
 package com.demo.bolian.security.app;
 
+import com.demo.bolian.security.app.authentication.openid.OpenIdAuthenticationSecurityConfig;
 import com.demo.bolian.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.demo.bolian.security.core.properties.SecurityConstants;
 import com.demo.bolian.security.core.properties.SecurityProperties;
@@ -31,6 +32,9 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Autowired
+    private OpenIdAuthenticationSecurityConfig openIdAuthenticationSecurityConfig;
+
+    @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
     @Autowired
@@ -49,6 +53,8 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .apply(smsCodeAuthenticationSecurityConfig)
                 .and()
                 .apply(imoocSocialSecurityConfig)
+                .and()
+                .apply(openIdAuthenticationSecurityConfig)
                 .and()
                 .authorizeRequests()
                 .antMatchers(
