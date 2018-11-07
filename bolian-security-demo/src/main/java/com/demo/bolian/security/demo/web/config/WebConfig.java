@@ -1,7 +1,7 @@
 package com.demo.bolian.security.demo.web.config;
 
 import com.demo.bolian.security.demo.web.filter.TimeFilter;
-import com.demo.bolian.security.demo.web.intercetper.TimeIntercetper;
+import com.demo.bolian.security.demo.web.intercepetor.TimeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -15,19 +15,30 @@ import java.util.List;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+    private final TimeInterceptor timeInterceptor;
+
     @Autowired
-    private TimeIntercetper timeIntercetper;
+    public WebConfig(TimeInterceptor timeInterceptor) {
+        this.timeInterceptor = timeInterceptor;
+    }
 
 //    @Override
 //    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
 //
 //    }
 
+    /**
+     * 添加拦截器
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(timeIntercetper);
+        registry.addInterceptor(timeInterceptor);
     }
 
+    /**
+     * 添加过滤器
+     */
     @Bean
     public FilterRegistrationBean timeFilter() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
