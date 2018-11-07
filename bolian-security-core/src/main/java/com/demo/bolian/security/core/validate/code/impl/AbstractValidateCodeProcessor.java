@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.demo.bolian.security.core.validate.code.impl;
 
@@ -20,124 +20,128 @@ import org.springframework.web.context.request.ServletWebRequest;
  */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
 
-	/**
-	 * 操作session的工具类
-	 */
-	private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
-	/**
-	 * 收集系统中所有的 {@link ValidateCodeGenerator} 接口的实现。
-	 */
-	@Autowired
-	private Map<String, ValidateCodeGenerator> validateCodeGenerators;
+    /**
+     * 操作session的工具类
+     */
+//    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
+    /**
+     * 收集系统中所有的 {@link ValidateCodeGenerator} 接口的实现。
+     */
+    @Autowired
+    private Map<String, ValidateCodeGenerator> validateCodeGenerators;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.imooc.security.core.validate.code.ValidateCodeProcessor#create(org.
-	 * springframework.web.context.request.ServletWebRequest)
-	 */
-	@Override
-	public void create(ServletWebRequest request) throws Exception {
-		C validateCode = generate(request);
-		save(request, validateCode);
-		send(request, validateCode);
-	}
+    @Autowired
+    private ValidateCodeRepository validateCodeRepository;
 
-	/**
-	 * 生成校验码
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	private C generate(ServletWebRequest request) {
-		String type = getValidateCodeType(request).toString().toLowerCase();
-		String generatorName = type + ValidateCodeGenerator.class.getSimpleName();
-		ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(generatorName);
-		if (validateCodeGenerator == null) {
-			throw new ValidateCodeException("验证码生成器" + generatorName + "不存在");
-		}
-		return (C) validateCodeGenerator.generate(request);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.imooc.security.core.validate.code.ValidateCodeProcessor#create(org.
+     * springframework.web.context.request.ServletWebRequest)
+     */
+    @Override
+    public void create(ServletWebRequest request) throws Exception {
+        C validateCode = generate(request);
+        save(request, validateCode);
+        send(request, validateCode);
+    }
 
-	/**
-	 * 保存校验码
-	 * 
-	 * @param request
-	 * @param validateCode
-	 */
-	private void save(ServletWebRequest request, C validateCode) {
-		//只拿code和过期时间存放在session里，因为用redis做session必须要序列化,BufferedImage 做不了序列化
-		ValidateCode code = new ValidateCode(validateCode.getCode(),validateCode.getExpireTime());
-		sessionStrategy.setAttribute(request, getSessionKey(request), code);
-	}
+    /**
+     * 生成校验码
+     *
+     * @param request
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    private C generate(ServletWebRequest request) {
+        String type = getValidateCodeType(request).toString().toLowerCase();
+        String generatorName = type + ValidateCodeGenerator.class.getSimpleName();
+        ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(generatorName);
+        if (validateCodeGenerator == null) {
+            throw new ValidateCodeException("验证码生成器" + generatorName + "不存在");
+        }
+        return (C) validateCodeGenerator.generate(request);
+    }
 
-	/**
-	 * 构建验证码放入session时的key
-	 * 
-	 * @param request
-	 * @return
-	 */
-	private String getSessionKey(ServletWebRequest request) {
-		return SESSION_KEY_PREFIX + getValidateCodeType(request).toString().toUpperCase();
-	}
+    /**
+     * 保存校验码
+     *
+     * @param request
+     * @param validateCode
+     */
+    private void save(ServletWebRequest request, C validateCode) {
+        //只拿code和过期时间存放在session里，因为用redis做session必须要序列化,BufferedImage 做不了序列化
+        ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
+//		sessionStrategy.setAttribute(request, getSessionKey(request), code);
+        validateCodeRepository.save(request, code, getValidateCodeType(request));
+    }
 
-	/**
-	 * 发送校验码，由子类实现
-	 * 
-	 * @param request
-	 * @param validateCode
-	 * @throws Exception
-	 */
-	protected abstract void send(ServletWebRequest request, C validateCode) throws Exception;
+    /**
+     * 构建验证码放入session时的key
+     *
+     * @param request
+     * @return
+     */
+    private String getSessionKey(ServletWebRequest request) {
+        return SESSION_KEY_PREFIX + getValidateCodeType(request).toString().toUpperCase();
+    }
 
-	/**
-	 * 根据请求的url获取校验码的类型
-	 * 
-	 * @param request
-	 * @return
-	 */
-	private ValidateCodeType getValidateCodeType(ServletWebRequest request) {
-		String type = StringUtils.substringBefore(getClass().getSimpleName(), "CodeProcessor");
-		return ValidateCodeType.valueOf(type.toUpperCase());
-	}
+    /**
+     * 发送校验码，由子类实现
+     *
+     * @param request
+     * @param validateCode
+     * @throws Exception
+     */
+    protected abstract void send(ServletWebRequest request, C validateCode) throws Exception;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void validate(ServletWebRequest request) {
+    /**
+     * 根据请求的url获取校验码的类型
+     *
+     * @param request
+     * @return
+     */
+    private ValidateCodeType getValidateCodeType(ServletWebRequest request) {
+        String type = StringUtils.substringBefore(getClass().getSimpleName(), "CodeProcessor");
+        return ValidateCodeType.valueOf(type.toUpperCase());
+    }
 
-		ValidateCodeType processorType = getValidateCodeType(request);
-		String sessionKey = getSessionKey(request);
+    @SuppressWarnings("unchecked")
+    @Override
+    public void validate(ServletWebRequest request) {
 
-		C codeInSession = (C) sessionStrategy.getAttribute(request, sessionKey);
+        ValidateCodeType codeType = getValidateCodeType(request);
+//		String sessionKey = getSessionKey(request);
 
-		String codeInRequest;
-		try {
-			codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(),
-					processorType.getParamNameOnValidate());
-		} catch (ServletRequestBindingException e) {
-			throw new ValidateCodeException("获取验证码的值失败");
-		}
+        C codeInSession = (C) validateCodeRepository.get(request, codeType);
 
-		if (StringUtils.isBlank(codeInRequest)) {
-			throw new ValidateCodeException(processorType + "验证码的值不能为空");
-		}
+        String codeInRequest;
+        try {
+            codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(),
+                    codeType.getParamNameOnValidate());
+        } catch (ServletRequestBindingException e) {
+            throw new ValidateCodeException("获取验证码的值失败");
+        }
 
-		if (codeInSession == null) {
-			throw new ValidateCodeException(processorType + "验证码不存在");
-		}
+        if (StringUtils.isBlank(codeInRequest)) {
+            throw new ValidateCodeException(codeType + "验证码的值不能为空");
+        }
 
-		if (codeInSession.isExpried()) {
-			sessionStrategy.removeAttribute(request, sessionKey);
-			throw new ValidateCodeException(processorType + "验证码已过期");
-		}
+        if (codeInSession == null) {
+            throw new ValidateCodeException(codeType + "验证码不存在");
+        }
 
-		if (!StringUtils.equals(codeInSession.getCode(), codeInRequest)) {
-			throw new ValidateCodeException(processorType + "验证码不匹配");
-		}
+        if (codeInSession.isExpried()) {
+            validateCodeRepository.remove(request, codeType);
+            throw new ValidateCodeException(codeType + "验证码已过期");
+        }
 
-		sessionStrategy.removeAttribute(request, sessionKey);
-	}
+        if (!StringUtils.equals(codeInSession.getCode(), codeInRequest)) {
+            throw new ValidateCodeException(codeType + "验证码不匹配");
+        }
+
+        validateCodeRepository.remove(request, codeType);
+    }
 
 }
