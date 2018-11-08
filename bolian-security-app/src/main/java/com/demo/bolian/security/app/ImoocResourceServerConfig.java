@@ -66,7 +66,7 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".json",
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".html",
                         securityProperties.getBrowser().getSignOutUrl(),
-                        "/user/regist")
+                        "/user/regist","/social/signUp")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

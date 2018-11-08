@@ -53,6 +53,10 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	}
 
 
+	/**
+	 * 方法名就是bean的名字
+	 * @return
+	 */
 	@Bean
 	public SpringSocialConfigurer imoocSocialSecurityConfig() {
 		String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
