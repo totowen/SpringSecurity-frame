@@ -5,7 +5,7 @@ package com.demo.bolian.security.core.social.weixin.config;
 
 import com.demo.bolian.security.core.properties.SecurityProperties;
 import com.demo.bolian.security.core.properties.WeixinProperties;
-import com.demo.bolian.security.core.social.ImoocConnectView;
+import com.demo.bolian.security.core.social.view.ImoocConnectView;
 import com.demo.bolian.security.core.social.weixin.connect.WeixinConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -20,6 +20,7 @@ import org.springframework.web.servlet.View;
 /**
  * 微信登录配置
  * 
+ * @author zhailiang
  *
  */
 @Configuration

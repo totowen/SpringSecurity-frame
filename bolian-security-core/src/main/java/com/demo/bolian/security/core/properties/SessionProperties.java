@@ -4,6 +4,8 @@
 package com.demo.bolian.security.core.properties;
 
 /**
+ * session管理相关配置项
+ * 
  *
  */
 public class SessionProperties {

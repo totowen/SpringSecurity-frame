@@ -1,44 +1,54 @@
+/**
+ * 
+ */
 package com.demo.bolian.security.demo.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ *
+ */
 public class UserQueryCondition {
+	
+	private String username;
+	
+	@ApiModelProperty(value = "用户年龄起始值")
+	private int age;
+	@ApiModelProperty(value = "用户年龄终止值")
+	private int ageTo;
+	
+	private String xxx;
 
-    private String username;
+	public String getUsername() {
+		return username;
+	}
 
-    private int age;
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    private int ageTo;
+	public int getAge() {
+		return age;
+	}
 
-    private String xxx;
+	public void setAge(int age) {
+		this.age = age;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public int getAgeTo() {
+		return ageTo;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setAgeTo(int ageTo) {
+		this.ageTo = ageTo;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public String getXxx() {
+		return xxx;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getAgeTo() {
-        return ageTo;
-    }
-
-    public void setAgeTo(int ageTo) {
-        this.ageTo = ageTo;
-    }
-
-    public String getXxx() {
-        return xxx;
-    }
-
-    public void setXxx(String xxx) {
-        this.xxx = xxx;
-    }
+	public void setXxx(String xxx) {
+		this.xxx = xxx;
+	}
+	
 }

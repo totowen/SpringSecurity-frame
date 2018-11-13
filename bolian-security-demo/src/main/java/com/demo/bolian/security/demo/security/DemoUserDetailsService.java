@@ -60,7 +60,7 @@ public class DemoUserDetailsService implements UserDetailsService, SocialUserDet
 		
 		return new SocialUser(userId, password,
 				true, true, true, true,
-				AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+				AuthorityUtils.commaSeparatedStringToAuthorityList("xxx"));
 	}
 
 }

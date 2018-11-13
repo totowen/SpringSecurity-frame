@@ -17,15 +17,22 @@
             <artifactId>bolian-security-browser</artifactId>
             <version>${bolian.security.version}</version>
         </dependency>
-        <!--<dependency>
+
+
+        <dependency>
             <groupId>com.demo</groupId>
-            <artifactId>bolian-security-app</artifactId>
+            <artifactId>bolian-security-authorize</artifactId>
             <version>${bolian.security.version}</version>
-        </dependency>-->
+        </dependency>
+        <!--<dependency>
+            <groupId>com.imooc.security</groupId>
+            <artifactId>imooc-security-app</artifactId>
+            <version>${imooc.security.version}</version>
+        </dependency>
+         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -35,30 +42,27 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.7.0</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.7.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.7.0</version>
         </dependency>
-
-
-
     </dependencies>
+
 
     <build>
         <plugins>

@@ -7,16 +7,21 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import com.demo.bolian.security.core.properties.SecurityProperties;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
+
 /**
- * 当检测到会话并发时，进行的跳转逻辑
+ * 并发登录导致session失效时，默认的处理策略
+ * 
+ * @author zhailiang
+ *
  */
 public class ImoocExpiredSessionStrategy extends AbstractSessionStrategy implements SessionInformationExpiredStrategy {
 
-	public ImoocExpiredSessionStrategy(String invalidSessionUrl) {
-		super(invalidSessionUrl);
+	public ImoocExpiredSessionStrategy(SecurityProperties securityPropertie) {
+		super(securityPropertie);
 	}
 
 	/* (non-Javadoc)

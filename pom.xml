@@ -11,6 +11,7 @@
         <module>bolian-security-browser</module>
         <module>bolian-security-core</module>
         <module>bolian-security-demo</module>
+        <module>bolian-security-authorize</module>
     </modules>
     <packaging>pom</packaging>
 

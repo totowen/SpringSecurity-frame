@@ -6,10 +6,11 @@ package com.demo.bolian.security.core.social;
 import javax.sql.DataSource;
 
 import com.demo.bolian.security.core.properties.SecurityProperties;
+import com.demo.bolian.security.core.social.support.ImoocSpringSocialConfigurer;
+import com.demo.bolian.security.core.social.support.SocialAuthenticationFilterPostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
@@ -22,9 +23,10 @@ import org.springframework.social.security.SpringSocialConfigurer;
 
 
 /**
+ * 社交登录配置主类
+ * 
  *
  */
-@Order(1)
 @Configuration
 @EnableSocial
 public class SocialConfig extends SocialConfigurerAdapter {
@@ -34,13 +36,16 @@ public class SocialConfig extends SocialConfigurerAdapter {
 
 	@Autowired
 	private SecurityProperties securityProperties;
-
+	
 	@Autowired(required = false)
 	private ConnectionSignUp connectionSignUp;
-
+	
 	@Autowired(required = false)
 	private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
 
+	/* (non-Javadoc)
+	 * @see org.springframework.social.config.annotation.SocialConfigurerAdapter#getUsersConnectionRepository(org.springframework.social.connect.ConnectionFactoryLocator)
+	 */
 	@Override
 	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
 		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource,
@@ -51,10 +56,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
 		}
 		return repository;
 	}
-
-
+	
 	/**
-	 * 方法名就是bean的名字
+	 * 社交登录配置类，供浏览器或app模块引入设计登录配置用。
 	 * @return
 	 */
 	@Bean
@@ -66,11 +70,16 @@ public class SocialConfig extends SocialConfigurerAdapter {
 		return configurer;
 	}
 
+	/**
+	 * 用来处理注册流程的工具类
+	 * 
+	 * @param connectionFactoryLocator
+	 * @return
+	 */
 	@Bean
 	public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {
 		return new ProviderSignInUtils(connectionFactoryLocator,
 				getUsersConnectionRepository(connectionFactoryLocator)) {
 		};
 	}
-
 }

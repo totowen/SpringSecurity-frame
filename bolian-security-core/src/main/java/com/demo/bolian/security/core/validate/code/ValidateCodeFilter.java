@@ -26,6 +26,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 
 /**
+ * 校验验证码的过滤器
+ * 
  *
  */
 @Component("validateCodeFilter")

@@ -1,8 +1,20 @@
+/**
+ * 
+ */
 package com.demo.bolian.security.app;
 
+/**
+ *
+ */
 public class AppSecretException extends RuntimeException {
 
-    public AppSecretException(String msg) {
-        super(msg);
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1629364510827838114L;
+
+	public AppSecretException(String msg){
+		super(msg);
+	}
+	
 }

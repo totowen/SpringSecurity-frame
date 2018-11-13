@@ -8,10 +8,18 @@ import java.time.LocalDateTime;
 
 
 /**
+ * 验证码信息封装类
+ * 
+ * @author zhailiang
  *
  */
 public class ValidateCode implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1588203828504660915L;
+
 	private String code;
 	
 	private LocalDateTime expireTime;

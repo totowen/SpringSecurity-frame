@@ -17,7 +17,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 
 /**
- * @author zhailiang
+ * 默认的图片验证码生成器
  *
  */
 public class ImageCodeGenerator implements ValidateCodeGenerator {

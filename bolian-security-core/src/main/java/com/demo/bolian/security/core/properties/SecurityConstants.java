@@ -4,7 +4,6 @@
 package com.demo.bolian.security.core.properties;
 
 /**
- * @author zhailiang
  *
  */
 public interface SecurityConstants {

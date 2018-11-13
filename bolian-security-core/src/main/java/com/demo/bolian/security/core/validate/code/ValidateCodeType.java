@@ -7,6 +7,9 @@ package com.demo.bolian.security.core.validate.code;
 import com.demo.bolian.security.core.properties.SecurityConstants;
 
 /**
+ * 
+ * 校验码类型
+ * 
  *
  */
 public enum ValidateCodeType {

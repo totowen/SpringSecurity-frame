@@ -14,7 +14,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 /**
  * 短信验证码处理器
- * 
  *
  */
 @Component("smsValidateCodeProcessor")

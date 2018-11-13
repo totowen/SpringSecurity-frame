@@ -15,21 +15,11 @@ import org.springframework.social.connect.UserProfile;
  */
 public class QQAdapter implements ApiAdapter<QQ> {
 
-	/**
-	 * 判断QQ的服务是否还存在
-	 * @param api
-	 * @return
-	 */
 	@Override
 	public boolean test(QQ api) {
 		return true;
 	}
 
-	/**
-	 * 将ServiceProvider中Api的实现获取的用户信息适配到Connection中
-	 * @param api
-	 * @param values
-	 */
 	@Override
 	public void setConnectionValues(QQ api, ConnectionValues values) {
 		QQUserInfo userInfo = api.getUserInfo();
@@ -37,7 +27,7 @@ public class QQAdapter implements ApiAdapter<QQ> {
 		values.setDisplayName(userInfo.getNickname());
 		values.setImageUrl(userInfo.getFigureurl_qq_1());
 		values.setProfileUrl(null);
-		values.setProviderUserId(userInfo.getOpenId()); //服务商的用户id=openId
+		values.setProviderUserId(userInfo.getOpenId());
 	}
 
 	@Override

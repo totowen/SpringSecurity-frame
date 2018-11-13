@@ -9,7 +9,8 @@ import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 
 
 /**
- *	泛型参数 指的是API的类型
+ * @author zhailiang
+ *
  */
 public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 
@@ -24,6 +25,9 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 		this.appId = appId;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.social.oauth2.AbstractOAuth2ServiceProvider#getApi(java.lang.String)
+	 */
 	@Override
 	public QQ getApi(String accessToken) {
 		return new QQImpl(accessToken, appId);

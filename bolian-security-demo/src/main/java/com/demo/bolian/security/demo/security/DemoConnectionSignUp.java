@@ -5,7 +5,6 @@ package com.demo.bolian.security.demo.security;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
-import org.springframework.stereotype.Component;
 
 /**
  *

@@ -9,15 +9,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.demo.bolian.security.core.properties.SecurityProperties;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 
+
 /**
- * 当检测到会话过期时，进行的跳转逻辑
+ * 默认的session失效处理策略
+ * 
+ *
  */
 public class ImoocInvalidSessionStrategy extends AbstractSessionStrategy implements InvalidSessionStrategy {
 
-	public ImoocInvalidSessionStrategy(String invalidSessionUrl) {
-		super(invalidSessionUrl);
+	public ImoocInvalidSessionStrategy(SecurityProperties securityProperties) {
+		super(securityProperties);
 	}
 
 	@Override

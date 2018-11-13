@@ -14,10 +14,11 @@ import org.springframework.social.connect.ConnectionFactory;
 
 
 /**
+ * @author zhailiang
  *
  */
 @Configuration
-@ConditionalOnProperty(prefix = "imooc.security.social.qq", name = "app-id") //只有当配置文件中有对应的配置时，该类才会生效
+@ConditionalOnProperty(prefix = "imooc.security.social.qq", name = "app-id")
 public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 
 	@Autowired
