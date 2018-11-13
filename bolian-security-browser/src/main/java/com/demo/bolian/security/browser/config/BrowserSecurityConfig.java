@@ -7,12 +7,14 @@ import javax.sql.DataSource;
 
 import com.demo.bolian.security.core.authentication.AbstractChannelSecurityConfig;
 import com.demo.bolian.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.demo.bolian.security.core.authroize.AuthorizeConfigManager;
 import com.demo.bolian.security.core.properties.SecurityConstants;
 import com.demo.bolian.security.core.properties.SecurityProperties;
 import com.demo.bolian.security.core.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -55,6 +57,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
 	@Autowired
 	private LogoutSuccessHandler logoutSuccessHandler;
+
+	@Autowired
+	private AuthorizeConfigManager authorizeConfigManager;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -85,22 +90,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 				.logoutSuccessHandler(logoutSuccessHandler) //接收到页面退出的请求
 				.deleteCookies("JSESSIONID")
 				.and()
-			.authorizeRequests()
-				.antMatchers(
-					SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-					SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
-					securityProperties.getBrowser().getSignInPage(),
-					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
-					securityProperties.getBrowser().getSignUpUrl(),
-					securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".json",
-					securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",
-					securityProperties.getBrowser().getSignOutUrl(),
-					"/user/regist")
-					.permitAll()
-				.anyRequest()
-				.authenticated()
-				.and()
 			.csrf().disable();
+
+		authorizeConfigManager.config(http.authorizeRequests());
 		
 	}
 

@@ -10,7 +10,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.demo.bolian.security.app.social.AppSignUpUtils;
 import com.demo.bolian.security.core.properties.SecurityProperties;
 import com.demo.bolian.security.demo.dto.User;
 import com.demo.bolian.security.demo.dto.UserQueryCondition;
@@ -56,8 +55,8 @@ public class UserController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
-    @Autowired
-    private AppSignUpUtils appSignUpUtils;
+//    @Autowired
+//    private AppSignUpUtils appSignUpUtils;
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -67,8 +66,8 @@ public class UserController {
 
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
         String userId = user.getUsername();
-//		providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request)); //browser
-        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), userId); //app
+		providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request)); //browser
+//        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), userId); //app
     }
 
 //	@GetMapping("/me")

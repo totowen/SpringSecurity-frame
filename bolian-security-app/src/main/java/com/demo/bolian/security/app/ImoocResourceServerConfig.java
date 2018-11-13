@@ -2,6 +2,7 @@ package com.demo.bolian.security.app;
 
 import com.demo.bolian.security.app.authentication.openid.OpenIdAuthenticationSecurityConfig;
 import com.demo.bolian.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.demo.bolian.security.core.authroize.AuthorizeConfigManager;
 import com.demo.bolian.security.core.properties.SecurityConstants;
 import com.demo.bolian.security.core.properties.SecurityProperties;
 import com.demo.bolian.security.core.validate.code.ValidateCodeSecurityConfig;
@@ -40,6 +41,9 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private SpringSocialConfigurer imoocSocialSecurityConfig;
 
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.formLogin()
@@ -56,21 +60,8 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .apply(openIdAuthenticationSecurityConfig)
                 .and()
-                .authorizeRequests()
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
-                        securityProperties.getBrowser().getSignInPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".json",
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl() + ".html",
-                        securityProperties.getBrowser().getSignOutUrl(),
-                        "/user/regist","/social/signUp")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
                 .csrf().disable();
+
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 }
