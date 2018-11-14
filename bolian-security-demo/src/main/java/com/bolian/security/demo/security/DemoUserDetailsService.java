@@ -23,28 +23,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Transactional
-public class DemoUserDetailsService implements UserDetailsService, SocialUserDetailsService {
+public class DemoUserDetailsService implements SocialUserDetailsService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.core.userdetails.UserDetailsService#
-	 * loadUserByUsername(java.lang.String)
-	 */
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		logger.info("表单登录用户名:" + username);
-//		Admin admin = adminRepository.findByUsername(username);
-//		admin.getUrls();
-//		return admin;
-		return buildUser(username);
-	}
 
 	@Override
 	public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
