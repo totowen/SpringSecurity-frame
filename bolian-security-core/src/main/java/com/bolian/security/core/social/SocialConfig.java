@@ -11,6 +11,7 @@ import com.bolian.security.core.social.support.SocialAuthenticationFilterPostPro
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
@@ -27,6 +28,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
  * 
  *
  */
+@Order(1)
 @Configuration
 @EnableSocial
 public class SocialConfig extends SocialConfigurerAdapter {

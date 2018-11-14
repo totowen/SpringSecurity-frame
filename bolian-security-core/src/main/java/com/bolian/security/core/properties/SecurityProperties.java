@@ -6,7 +6,7 @@ package com.bolian.security.core.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- *
+ * 系统配置封装
  */
 @ConfigurationProperties(prefix = "imooc.security")
 public class SecurityProperties {

@@ -49,8 +49,8 @@ public class AbstractSessionStrategy {
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	/**
-	 * @param invalidSessionUrl
-	 * @param invalidSessionHtmlUrl
+	 * 校验失效链接是否合法
+	 * @param securityPropertie
 	 */
 	public AbstractSessionStrategy(SecurityProperties securityPropertie) {
 		String invalidSessionUrl = securityPropertie.getBrowser().getSession().getSessionInvalidUrl();
@@ -60,13 +60,7 @@ public class AbstractSessionStrategy {
 		this.securityPropertie = securityPropertie;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.web.session.InvalidSessionStrategy#
-	 * onInvalidSessionDetected(javax.servlet.http.HttpServletRequest,
-	 * javax.servlet.http.HttpServletResponse)
-	 */
+
 	protected void onSessionInvalid(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		logger.info("session失效");
