@@ -8,3 +8,4 @@
 /bolian-security-browser/*.iml
 /bolian-security-app/*.iml
 /bolian-security-app/target
+/bolian-security-authorize/target

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>bolian-security</artifactId>
-        <groupId>com.demo</groupId>
+        <groupId>com.bolian</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,14 +13,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.demo</groupId>
+            <groupId>com.bolian</groupId>
             <artifactId>bolian-security-browser</artifactId>
             <version>${bolian.security.version}</version>
         </dependency>
 
 
         <dependency>
-            <groupId>com.demo</groupId>
+            <groupId>com.bolian</groupId>
             <artifactId>bolian-security-authorize</artifactId>
             <version>${bolian.security.version}</version>
         </dependency>
