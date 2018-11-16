@@ -17,8 +17,6 @@ import org.springframework.util.Assert;
 
 /**
  * openId
- * 
- *
  */
 public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 	// ~ Static fields/initializers

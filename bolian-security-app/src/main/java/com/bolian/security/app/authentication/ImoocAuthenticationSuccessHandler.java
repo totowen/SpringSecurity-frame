@@ -49,14 +49,6 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 	@Autowired
 	private AuthorizationServerTokenServices authorizationServerTokenServices;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.web.authentication.
-	 * AuthenticationSuccessHandler#onAuthenticationSuccess(javax.servlet.http.
-	 * HttpServletRequest, javax.servlet.http.HttpServletResponse,
-	 * org.springframework.security.core.Authentication)
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
