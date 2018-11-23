@@ -17,8 +17,6 @@ import org.springframework.util.Assert;
 
 /**
  * 短信登录过滤器
- * 
- *
  */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 	// ~ Static fields/initializers

@@ -23,13 +23,22 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 @Transactional
-public class DemoUserDetailsService implements SocialUserDetailsService {
+public class DemoUserDetailsService implements UserDetailsService, SocialUserDetailsService {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		logger.info("表单登录用户名:" + username);
+//		Admin admin = adminRepository.findByUsername(username);
+//		admin.getUrls();
+//		return admin;
+		return buildUser(username);
+	}
 
 	@Override
 	public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
@@ -42,10 +51,10 @@ public class DemoUserDetailsService implements SocialUserDetailsService {
 		//根据查找到的用户信息判断用户是否被冻结
 		String password = passwordEncoder.encode("123456");
 		logger.info("数据库密码是:"+password);
-		
+
 		return new SocialUser(userId, password,
 				true, true, true, true,
-				AuthorityUtils.commaSeparatedStringToAuthorityList("xxx"));
+				AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
 	}
 
 }

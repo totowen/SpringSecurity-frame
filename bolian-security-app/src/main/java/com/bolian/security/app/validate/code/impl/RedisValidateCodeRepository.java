@@ -18,8 +18,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 /**
  * 基于redis的验证码存取器，避免由于没有session导致无法存取验证码的问题
- * 
- *
  */
 @Component
 public class RedisValidateCodeRepository implements ValidateCodeRepository {
@@ -27,28 +25,13 @@ public class RedisValidateCodeRepository implements ValidateCodeRepository {
 	@Autowired
 	private RedisTemplate<Object, Object> redisTemplate;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.imooc.security.core.validate.code.ValidateCodeRepository#save(org.
-	 * springframework.web.context.request.ServletWebRequest,
-	 * com.imooc.security.core.validate.code.ValidateCode,
-	 * com.imooc.security.core.validate.code.ValidateCodeType)
-	 */
+
 	@Override
 	public void save(ServletWebRequest request, ValidateCode code, ValidateCodeType type) {
 		redisTemplate.opsForValue().set(buildKey(request, type), code, 30, TimeUnit.MINUTES);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.imooc.security.core.validate.code.ValidateCodeRepository#get(org.
-	 * springframework.web.context.request.ServletWebRequest,
-	 * com.imooc.security.core.validate.code.ValidateCodeType)
-	 */
+
 	@Override
 	public ValidateCode get(ServletWebRequest request, ValidateCodeType type) {
 		Object value = redisTemplate.opsForValue().get(buildKey(request, type));
@@ -58,14 +41,7 @@ public class RedisValidateCodeRepository implements ValidateCodeRepository {
 		return (ValidateCode) value;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.imooc.security.core.validate.code.ValidateCodeRepository#remove(org.
-	 * springframework.web.context.request.ServletWebRequest,
-	 * com.imooc.security.core.validate.code.ValidateCodeType)
-	 */
+
 	@Override
 	public void remove(ServletWebRequest request, ValidateCodeType type) {
 		redisTemplate.delete(buildKey(request, type));

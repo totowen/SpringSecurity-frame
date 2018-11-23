@@ -20,8 +20,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 短信登录配置
- * 
- *
  */
 @Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
@@ -35,12 +33,9 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@Autowired
+	@Autowired(required = false)
 	private PersistentTokenRepository persistentTokenRepository;
 	
-	/* (non-Javadoc)
-	 * @see org.springframework.security.config.annotation.SecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.SecurityBuilder)
-	 */
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		
@@ -48,8 +43,10 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
 		smsCodeAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
 		smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(imoocAuthenticationSuccessHandler);
 		smsCodeAuthenticationFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
-		String key = UUID.randomUUID().toString();
-		smsCodeAuthenticationFilter.setRememberMeServices(new PersistentTokenBasedRememberMeServices(key, userDetailsService, persistentTokenRepository));
+		if(null!=persistentTokenRepository){
+			String key = UUID.randomUUID().toString();
+			smsCodeAuthenticationFilter.setRememberMeServices(new PersistentTokenBasedRememberMeServices(key, userDetailsService, persistentTokenRepository));
+		}
 		
 		SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
 		smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);

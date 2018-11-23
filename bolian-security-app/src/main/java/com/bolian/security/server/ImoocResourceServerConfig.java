@@ -18,10 +18,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.social.security.SpringSocialConfigurer;
 
 
+
 /**
  * 资源服务器配置
- * 
- *
  */
 @Configuration
 @EnableResourceServer
@@ -50,14 +49,15 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	@Autowired
 	private FormAuthenticationConfig formAuthenticationConfig;
-	
+
+
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		
 		formAuthenticationConfig.configure(http);
 		
-		http.apply(validateCodeSecurityConfig)
-				.and()
+		http//.apply(validateCodeSecurityConfig)
+				//.and()
 			.apply(smsCodeAuthenticationSecurityConfig)
 				.and()
 			.apply(imoocSocialSecurityConfig)
@@ -68,5 +68,6 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		authorizeConfigManager.config(http.authorizeRequests());
 	}
-	
+
+
 }

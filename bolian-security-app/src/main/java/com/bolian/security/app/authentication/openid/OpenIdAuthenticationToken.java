@@ -10,7 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
 /**
- *
+ * 用来封装第三方登陆信息
  */
 public class OpenIdAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -18,8 +18,13 @@ public class OpenIdAuthenticationToken extends AbstractAuthenticationToken {
 
 	// ~ Instance fields
 	// ================================================================================================
-
+	/**
+	 * 存放openId
+	 */
 	private final Object principal;
+	/**
+	 * 表示那个服务提供商的
+	 */
 	private String providerId;
 
 	// ~ Constructors
@@ -45,7 +50,6 @@ public class OpenIdAuthenticationToken extends AbstractAuthenticationToken {
 	 * authentication token.
 	 *
 	 * @param principal
-	 * @param credentials
 	 * @param authorities
 	 */
 	public OpenIdAuthenticationToken(Object principal,

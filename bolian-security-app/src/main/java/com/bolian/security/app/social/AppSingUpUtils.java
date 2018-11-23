@@ -19,8 +19,6 @@ import org.springframework.web.context.request.WebRequest;
 
 /**
  * app环境下替换providerSignInUtils，避免由于没有session导致读不到社交用户信息的问题
- * 
- *
  */
 @Component
 public class AppSingUpUtils {

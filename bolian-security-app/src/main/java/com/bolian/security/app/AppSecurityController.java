@@ -39,6 +39,7 @@ public class AppSecurityController extends SocialController {
 	@GetMapping(SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
+		//每次请求上来的请求信息还是放在session中的，在跳转之前从session中拿出请求信息放到redis中，因为下一个请求上来之后session又是重新创建的。
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
 		appSingUpUtils.saveConnectionData(new ServletWebRequest(request), connection.createData());
 		return buildSocialUserInfo(connection);

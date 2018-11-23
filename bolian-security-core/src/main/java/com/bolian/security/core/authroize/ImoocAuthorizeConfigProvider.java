@@ -28,6 +28,7 @@ public class ImoocAuthorizeConfigProvider implements AuthorizeConfigProvider {
                 SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
                 SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_OPENID,
                 SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
+                SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL,
                 securityProperties.getBrowser().getSignInPage(),
                 securityProperties.getBrowser().getSignUpUrl(),
                 securityProperties.getBrowser().getSession().getSessionInvalidUrl()).permitAll();

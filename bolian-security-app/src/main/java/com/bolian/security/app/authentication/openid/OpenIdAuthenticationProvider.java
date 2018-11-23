@@ -16,20 +16,18 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.security.SocialUserDetailsService;
 
 /**
- *
+ * 验证OpenIdAuthenticationToken
  */
 public class OpenIdAuthenticationProvider implements AuthenticationProvider {
 
 	private SocialUserDetailsService userDetailsService;
 
+	/**
+	 * 查找userconnection数据库表的类
+	 */
 	private UsersConnectionRepository usersConnectionRepository;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.authentication.AuthenticationProvider#
-	 * authenticate(org.springframework.security.core.Authentication)
-	 */
+
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 

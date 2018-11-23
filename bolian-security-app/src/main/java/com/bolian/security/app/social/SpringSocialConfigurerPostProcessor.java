@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 
 /**
- *
+ * 所有的bean初始化之前和初始化之后都要经过的两个方法
  */
 @Component
 public class SpringSocialConfigurerPostProcessor implements BeanPostProcessor {

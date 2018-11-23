@@ -27,8 +27,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 /**
  * 认证服务器配置
- * 
- *
  */
 @Configuration
 @EnableAuthorizationServer
@@ -54,9 +52,11 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 
 	/**
 	 * 认证及token配置
+	 * 在TokenEndPoint中将调取该端点配置信息
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		//因为继承了AuthorizationServerConfigurerAdapter类，所以token存储，AuthenticationManager，UserDetailsService都需要手动配置
 		endpoints.tokenStore(tokenStore)
 				.authenticationManager(authenticationManager)
 				.userDetailsService(userDetailsService);
